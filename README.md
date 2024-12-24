@@ -1,66 +1,83 @@
-# screen-recorder WIP
+# ScreenRecorder   [![pipeline status](https://gitlab.com/vijai/screenrecorder/badges/master/pipeline.svg)](https://gitlab.com/vijai/screenrecorder/commits/master) [![Crowdin](https://d322cqt584bo4o.cloudfront.net/screencam/localized.svg)](https://crowdin.com/project/screencam)
+![App Icon](ic_launcher-web.png?raw=true "App Icon")
 
+Requires Lollipop and above (SDK 21+)
 
-import 'package:flutter/material.dart';
-import 'package:google_ml_kit/google_ml_kit.dart';
-import 'package:image_picker/image_picker.dart';
+<a href="https://f-droid.org/packages/com.orpheusdroid.screenrecorder/" target="_blank">
+<img src="https://f-droid.org/badge/get-it-on.png" alt="Get it on F-Droid" height="100"/></a>
+<a href="https://play.google.com/store/apps/details?id=com.orpheusdroid.screenrecorder" target="_blank">
+<img src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png" alt="Get it on Google Play" height="100"/></a>
 
-void main() {
-  runApp(TextHighlighterApp());
-}
+## User Support
+Telegram: [https://goo.gl/TDs42r](https://goo.gl/TDs42r)
 
-class TextHighlighterApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: TextRecognitionScreen(),
-    );
-  }
-}
+[![Telegram Support QR](https://goo.gl/TDs42r.qr "Telegram Support QR")](https://goo.gl/TDs42r.qr)
 
-class TextRecognitionScreen extends StatefulWidget {
-  @override
-  _TextRecognitionScreenState createState() => _TextRecognitionScreenState();
-}
+Slack:    Comming soon!
 
-class _TextRecognitionScreenState extends State<TextRecognitionScreen> {
-  String recognizedText = '';
-  final ImagePicker _picker = ImagePicker();
+## Donation/Payments
+#### PayPal:      [![Paypal Donate](https://www.paypalobjects.com/webstatic/en_US/i/btn/png/gold-pill-paypal-26px.png)](https://paypal.me/vijaichander/5)
+#### Flattr:      [![Flattr this git repo](https://button.flattr.com/flattr-badge-large.png)](https://flattr.com/submit/auto?fid=66ngyo&url=https%3A%2F%2Fgithub.com%2Fvijai1996%2Fscreenrecorder)
 
-  Future<void> recognizeTextFromImage() async {
-    final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
-    if (image == null) return;
+## Building the app
 
-    final InputImage inputImage = InputImage.fromFilePath(image.path);
-    final TextRecognizer textRecognizer = GoogleMlKit.vision.textRecognizer();
+### Make a copy of the repository
 
-    try {
-      final RecognizedText result = await textRecognizer.processImage(inputImage);
-      setState(() {
-        recognizedText = result.text;
-      });
-    } catch (e) {
-      print('Error: $e');
-    }
-  }
+Make sure to have Git installed and clone the repo using
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text('OCR and Highlight')),
-      body: Column(
-        children: [
-          ElevatedButton(
-            onPressed: recognizeTextFromImage,
-            child: Text('Pick and Recognize Text'),
-          ),
-          Expanded(
-            child: SingleChildScrollView(
-              child: Text(recognizedText, style: TextStyle(fontSize: 16)),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
+```
+git clone https://gitlab.com/vijai/screenrecorder
+```
+
+### Building the apk
+Building apk is possible in 3 ways
+* 1.a. [Building debug apk using commandline](#1a-building-debug-apk-using-commandline)
+* 1.b. [Building release apk using commandline](#1b-building-release-apk-using-commandline)
+* 2.   [Building using AndroidStudio](#2-building-using-androidstudio)
+
+### 1.a. Building debug apk using commandline
+Switch to project root directory and run
+
+#### Build Fdroid flavour
+```
+gradlew.bat assembleFdroidDebug
+```
+
+#### Build Play flavour
+```
+gradlew.bat assemblePlayDebug
+```
+
+### 1.b. Building release apk using commandline
+Switch to project root directory and make sure to edit `app` module's build.gradle to include signing key information and run
+
+#### Build Fdroid flavour
+```
+gradlew.bat assembleFdroidRelease
+```
+
+#### Build Play flavour
+```
+gradlew.bat assemblePlayRelease
+```
+
+#### 2. Building using AndroidStudio
+Open Android Studio -> File -> Import Project -> Choose the cloned project folder and continue with the on-screen instructions
+
+## Contributions
+Any contribution to the app is welcome in the form of pull requests.
+
+## License and copyright infringements
+I will consider any kind of license or copyright infringements seriously and will send copyright claim notice or license infringement notice to anyone who is not adhering to them.
+
+If you notice any content which seem to be infringing, please fill the below google forms to help me indentify and take them down.
+
+[Google Form](https://goo.gl/forms/ntFKRXflFh2NH1dx1)
+
+## Authors
+
+* **Vijai Chander** - *Initial work* - [vijai](https://gitlab.com/vijai)
+
+## License
+
+This project is licensed under the GNU AGPLv3 - see the [LICENSE](LICENSE) file for details
