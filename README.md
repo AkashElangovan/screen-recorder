@@ -8,7 +8,7 @@
 Make sure to have Git installed and clone the repo using
 
 ```
-git clone [repo_link](https://github.com/AkashElangovan/screen-recorder.git)
+git clone https://github.com/AkashElangovan/screen-recorder.git
 ```
 
 ### Building the apk
